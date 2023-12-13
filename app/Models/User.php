@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
@@ -19,12 +20,18 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
+
+     public function tasks()
+     {
+         return $this->hasMany(Task::class);
+     }
     protected $fillable = [
         'name',
         'family',
         'username',
         'password',
     ];
+    
 
     /**
      * The attributes that should be hidden for serialization.

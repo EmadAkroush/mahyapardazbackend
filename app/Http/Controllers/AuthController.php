@@ -9,12 +9,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register' , 'test']]);
     }
 
 
@@ -55,13 +57,18 @@ class AuthController extends Controller
 
 
         $credentials = $request->only(['username', 'password']);
-
+         
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'نام کاربری یا رمز عبور اشتباه است .'], 401);
         }
 
         return $this->respondWithToken($token);
 
+    }
+
+    public function test(Request $request)
+    {
+       return User::all();
     }
 
     public function me()

@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+Route::get('test', [AuthController::class, 'test']);
+Route::resource('/tasks',  TasksController::class )->only(['store', 'index']);
+
+Route::get('/users' , [UserController::class , 'index']);
+Route::get('/usertask' , [UserController::class , 'userTask']);
+
 
 Route::post('logout', [AuthController::class, 'logout']);
 Route::post('refresh', [AuthController::class, 'refresh']);
-Route::post('me', [AuthController::class, 'me']);
+Route::get('me', [AuthController::class, 'me']);
