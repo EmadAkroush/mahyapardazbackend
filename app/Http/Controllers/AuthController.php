@@ -16,7 +16,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register' , 'test']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register' , 'test' , 'me']]);
     }
 
 
@@ -57,7 +57,7 @@ class AuthController extends Controller
 
 
         $credentials = $request->only(['username', 'password']);
-         
+
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'نام کاربری یا رمز عبور اشتباه است .'], 401);
         }

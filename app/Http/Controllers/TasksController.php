@@ -29,6 +29,18 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $validator = Validator::make($request->all() , [
+        //     'user_id' => 'required',
+        //     'issue' => 'required',
+        //     'description' => 'required',
+        //     'startdate' => 'required',
+        //     'endtdate' => 'required',
+        // ]);
+        // // |email|unique:users,email
+        // if($validator->fails()){
+        //     return response()->json($validator->messages() , 422);
+        // }
         $task = Task::create([
             'user_id' => $request->user_id,
             'issue' => $request->issue,
